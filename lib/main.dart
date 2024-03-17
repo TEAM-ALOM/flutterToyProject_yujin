@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todolist/todolistmake.dart';
 
 void main() {
   runApp(const MyApp());
@@ -53,7 +54,6 @@ class _MyHomePageState extends State<MyHomePage> {
           fontSize: 30,
         ),
         ),
-
         leading: Icon(
           Icons.check,
           size: 35,
@@ -65,6 +65,10 @@ class _MyHomePageState extends State<MyHomePage> {
             size: 40,
             ),
             onPressed: (){
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context)=>const todolistmake()),
+              );
               //+버튼을 통한 투두리스트 실행
             },
           ),
@@ -153,87 +157,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-
-        /*body : Container(
-        color: Color.fromARGB(255, 253, 233, 193),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ElevatedButton(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("오늘의 할 일",
-                    style: TextStyle(
-                      fontSize: 30,color: Colors.black,
-                    ),
-                  ),
-                  Icon(
-                    Icons.add,
-                    size: 30,
-                    color: Colors.black,
-                  ),
-                ],
-              ),
-              onPressed: (){
-              },
-            ),
-            TextButton.icon( onPressed: () {
-            },
-              label: Text(
-                "오늘의 할 일",
-              style: TextStyle(
-                fontSize: 30,color: Colors.black,
-              ),
-              ),
-          icon:
-          Icon(
-              Icons.add, size: 30,color: Colors.black,
-          ),
-            ),
-            TextButton.icon( onPressed: () {
-            },
-              label: Text(
-                "일주일 간 해야할 일",
-                style: TextStyle(
-                  fontSize: 30,color: Colors.black,
-                ),
-              ),
-              icon:
-              Icon(
-                Icons.add, size: 30,color: Colors.black,
-              ),
-            ),
-            TextButton.icon( onPressed: () {
-            },
-              label: Text(
-                "이번 달의 할 일",
-                style: TextStyle(
-                  fontSize: 30,color: Colors.black,
-                ),
-              ),
-              icon:
-              Icon(
-                Icons.add, size: 30,color: Colors.black,
-              ),
-            ),
-            TextButton.icon( onPressed: () {
-            },
-              label: Text(
-                "지금 할 일",
-                style: TextStyle(
-                  fontSize: 30,color: Colors.black,
-                ),
-              ),
-              icon:
-              Icon(
-                Icons.add, size: 30,color: Colors.black,
-              ),
-            ),
-          ],
-        ),
-      ),*/
     );
   }
 }
