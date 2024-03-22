@@ -18,61 +18,7 @@ class _todolistmakeState extends State<todolistmake> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 253, 233, 193),
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 253, 233, 193),
-        leading: TextButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text("취소",
-          style: TextStyle(
-            color: Colors.black,
-          ),
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text("완료",
-              style: TextStyle(
-                color: Colors.black,
-              ),
-            ),
-          ),
-        ],
-        centerTitle: true,
-        title: Text(
-          "오늘의 할일이 무엇인가요?",
-        ),
-        ),
-      body: Container(
-        child: SingleChildScrollView(
-          child:
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TextFormField(
-                  cursorColor: Colors.purple,
-                  style: const TextStyle(
-                      color: Colors.black,
-                  ),
-                  decoration: InputDecoration(
-                      labelText: "할 일",
-                    enabledBorder:UnderlineInputBorder(
-                      borderSide:BorderSide(color:Colors.purple,
-                      ),
-                    ),
-                    focusedBorder:UnderlineInputBorder(
-                      borderSide:BorderSide(color:Colors.purple,
-                      ),
-                    ),
-                ),
-            ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
+      Row(
                   children: [
                     Text("날짜",
                     style: TextStyle(fontSize: 18,
@@ -159,35 +105,6 @@ class _todolistmakeState extends State<todolistmake> {
                 SizedBox(
                   height: 30,
                 ),
-                Text("메모",
-                style: TextStyle(
-                  fontSize: 18,
-                ),
-                ),
-                TextFormField(
-                decoration: InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(vertical: 200.0,),
-                  border: OutlineInputBorder(),
-                  //labelText: "보류",
-                  hintText: "내용을 입력하세요!",
-                ),
-              ),
-            /*AlertDialog(
-              content:Container(
-                child: CupertinoButton(
-                  color: Colors.white,
-                  child: Text(
-                    '23 : 59',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                    ),
-                  ),
-                  onPressed: () =>{time1()},
-                  ),
-                ),
-              ),*/
               ],
             ),
         ),
