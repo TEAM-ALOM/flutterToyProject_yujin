@@ -9,16 +9,10 @@ class time1 extends StatefulWidget {
 }
 
 class _time1State extends State<time1> {
-  DateTime X = DateTime(2023, 6, 16, 22, 35);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body : CupertinoDatePicker(
-          initialDateTime: X,
-          mode: CupertinoDatePickerMode.time,
-          use24hFormat: true,
-          onDateTimeChanged: (DateTime newTime) {
+        body : onDateTimeChanged: (DateTime newTime) {
             setState(() => X = newTime);
           },
         ),
