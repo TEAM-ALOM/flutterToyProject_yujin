@@ -65,11 +65,6 @@ class _MyHomePageState extends State<MyHomePage> {
             size: 40,
             ),
             onPressed: (){
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context)=>const todolistmake()),
-              );
-              //+버튼을 통한 투두리스트 실행
             },
           ),
         ],
