@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/todolistmake.dart';
+import 'package:todolist/time.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -66,7 +66,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   context,
                   MaterialPageRoute(builder: (context)=>const todolistmake()),
               );
-              //+버튼을 통한 투두리스트 실행
             },
           ),
         ],
