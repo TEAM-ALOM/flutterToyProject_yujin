@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:todolist/time.dart';
 
 class todolistmake extends StatefulWidget {
   const todolistmake({super.key});
+
 
   @override
   State<todolistmake> createState() => _todolistmakeState();
@@ -11,10 +13,33 @@ class todolistmake extends StatefulWidget {
 
 class _todolistmakeState extends State<todolistmake> {
 
+  void _showDialog(Widget child) {
+    showCupertinoModalPopup<void>(
+      context: context,
+      builder: (BuildContext context) => Container(
+        height: 216,
+        padding: const EdgeInsets.only(top: 6.0),
+        margin: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        color: CupertinoColors.systemBackground.resolveFrom(context),
+        child: SafeArea(
+          top: false,
+          child: child,
+        ),
+      ),
+    );
+  }
+
   DateTime initialDay = DateTime.now();
   DateTime initialtime = DateTime.now();
+  DateTime time1 = DateTime(2023, 1, 1, 0, 0);
+  DateTime time2 = DateTime(2016, 1, 1, 23, 59);
+  TextEditingController A = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 253, 233, 193),
       appBar: AppBar(
@@ -24,16 +49,34 @@ class _todolistmakeState extends State<todolistmake> {
             Navigator.pop(context);
           },
           child: Text("취소",
-          style: TextStyle(
-            color: Colors.black,
-          ),
+            style: TextStyle(
+              color: Colors.black,
+            ),
           ),
         ),
         actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
+          TextButton(onPressed: () {
+            if ((A.text)=='')
+            {
+              showDialog(
+                context: context,
+                builder: (context)=>AlertDialog(
+                  actions: [
+                    TextButton(onPressed: () =>
+                        Navigator.pop(context),
+                      child: Text("확인"),
+                    ),
+                  ],
+                  title: Text("Error"),
+                  content: Text("할일을 작성해주세요."),
+                ),
+              );
+            }
+            else
+              {
+                Navigator.pop(context);
+              }
+          },
             child: Text("완료",
               style: TextStyle(
                 color: Colors.black,
@@ -45,153 +88,170 @@ class _todolistmakeState extends State<todolistmake> {
         title: Text(
           "오늘의 할일이 무엇인가요?",
         ),
-        ),
+      ),
       body: Container(
         child: SingleChildScrollView(
           child:
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TextFormField(
-                  cursorColor: Colors.purple,
-                  style: const TextStyle(
-                      color: Colors.black,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextFormField(
+                controller: A,
+                cursorColor: Colors.indigo,
+                style: const TextStyle(
+                  color: Colors.black,
+                ),
+                decoration: InputDecoration(
+                  labelText: "할 일",
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black,
+                    ),
                   ),
-                  decoration: InputDecoration(
-                      labelText: "할 일",
-                    enabledBorder:UnderlineInputBorder(
-                      borderSide:BorderSide(color:Colors.purple,
-                      ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.indigo,
                     ),
-                    focusedBorder:UnderlineInputBorder(
-                      borderSide:BorderSide(color:Colors.purple,
-                      ),
-                    ),
+                  ),
                 ),
-            ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    Text("날짜",
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  Text("날짜",
                     style: TextStyle(fontSize: 18,
                     ),
-                    ),
-                    SizedBox(
-                      width: 30,
-                    ),
-                    Text(
-                      '${initialDay.year} - ${initialDay.month} - ${initialDay.day}',
-                      style: TextStyle(fontSize: 25),
-                    ),
-                    SizedBox(
-                      width: 40,
-                    ),
-                    ElevatedButton(
-                        onPressed: () async {
-                          final DateTime? dateTime = await showDatePicker(
-                              context: context,
-                              initialDate: initialDay,
-                              firstDate: DateTime(2000),
-                              lastDate: DateTime(3000));
-                          if (dateTime != null) {
-                            setState(() {
-                              initialDay = dateTime;
-                            });
-                          }
-                        },
-                        child: Text('날짜 선택',
-                          style: TextStyle(fontSize: 20,
-                          color: Colors.black,
-                          ),
-                        ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    Text("시간",
-                      style: TextStyle(fontSize: 18,
+                  ),
+                  SizedBox(
+                    width: 30,
+                  ),
+                  Text(
+                    '${initialDay.year} - ${initialDay.month} - ${initialDay
+                        .day}',
+                    style: TextStyle(fontSize: 25,
+                    color: Colors.indigo,),
+                  ),
+                  SizedBox(
+                    width: 40,
+                  ),
+                  ElevatedButton(
+                    onPressed: () async {
+                      final DateTime? dateTime = await showDatePicker(
+                          context: context,
+                          initialDate: initialDay,
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(3000));
+                      if (dateTime != null) {
+                        setState(() {
+                          initialDay = dateTime;
+                        });
+                      }
+                    },
+                    child: Text('날짜 선택',
+                      style: TextStyle(fontSize: 20,
+                        color: Colors.black,
                       ),
                     ),
-                    SizedBox(
-                      child: CupertinoButton(
-                        color: Colors.white,
-                        child: Text(
-                          '0 : 0',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.black,
-                          ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Center(
+                child:
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 80,
                         ),
-                        onPressed: () => {Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context)=>const time1()),
+                        Text("시작시간",
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),),
+                        SizedBox(
+                          width: 95,
                         ),
-                        },
+                        Text("종료시간",style: TextStyle(
+                          fontSize: 20,
+                        ),),
+                      ],
+                    ),
+              ),
+              Row(
+                children: [
+                  Text("시간",
+                    style: TextStyle(fontSize: 18,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 40,
+                  ),
+                  SizedBox(
+                    child:  CupertinoButton(
+                      onPressed: () => _showDialog(
+                        CupertinoDatePicker(
+                          initialDateTime: time1,
+                          mode: CupertinoDatePickerMode.time,
+                          onDateTimeChanged: (DateTime newTime) {
+                            setState(() => time1 = newTime);
+                          },
+                        ),
+                      ),
+                      child: Text(
+                        '${time1.hour}:${time1.minute}',
+                        style: const TextStyle(
+                          fontSize: 30,
+                          color: Colors.indigo,
+                        ),
                       ),
                     ),
-                    SizedBox(
-                      child: CupertinoButton(
-                        color: Colors.white,
-                        child: Text(
-                          '23 : 59',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.black,
-                          ),
+                  ),
+                  SizedBox(
+                    width: 93,
+                  ),
+                  SizedBox(
+                    child: CupertinoButton(
+                      onPressed: () => _showDialog(
+                        CupertinoDatePicker(
+                          initialDateTime: time2,
+                          mode: CupertinoDatePickerMode.time,
+                          onDateTimeChanged: (DateTime newTime) {
+                            setState(() => time2 = newTime);
+                          },
                         ),
-                        onPressed: () =>{Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context)=>const time1()),
+                      ),
+                      child: Text(
+                        '${time2.hour}:${time2.minute}',
+                        style: const TextStyle(
+                          fontSize: 30,
+                          color: Colors.indigo,
                         ),
-                        },
                       ),
-                      ),
-                  ],
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Text("메모",
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Text("메모",
                 style: TextStyle(
                   fontSize: 18,
                 ),
-                ),
-                TextFormField(
+              ),
+              TextFormField(
                 decoration: InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(vertical: 200.0,),
+                  contentPadding: EdgeInsets.symmetric(vertical: 200.0,),
                   border: OutlineInputBorder(),
-                  //labelText: "보류",
                   hintText: "내용을 입력하세요!",
                 ),
               ),
-            /*AlertDialog(
-              content:Container(
-                child: CupertinoButton(
-                  color: Colors.white,
-                  child: Text(
-                    '23 : 59',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                    ),
-                  ),
-                  onPressed: () =>{time1()},
-                  ),
-                ),
-              ),*/
-              ],
-            ),
+            ],
+          ),
         ),
       ),
-      );
+    );
   }
 }
+

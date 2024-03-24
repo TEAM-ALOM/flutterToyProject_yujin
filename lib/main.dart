@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:todolist/todolistmake.dart';
+import 'package:flutter/widgets.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+void main() async{
+  await Hive.initFlutter();
   runApp(const MyApp());
 }
 
@@ -9,6 +12,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
+
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'ToDoList',
@@ -34,13 +38,6 @@ class MyHomePage extends StatefulWidget {//+에 이용
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  /*int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }*/
 
   @override
   Widget build(BuildContext context) {
