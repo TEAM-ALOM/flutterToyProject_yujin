@@ -64,7 +64,7 @@ class _todolistmakeState extends State<todolistmake> {
                   actions: [
                     TextButton(onPressed: () =>
                         Navigator.pop(context),
-                      child: Text("확인"),
+                      child: Text("OK"),
                     ),
                   ],
                   title: Text("Error"),
@@ -163,16 +163,16 @@ class _todolistmakeState extends State<todolistmake> {
                     Row(
                       children: [
                         SizedBox(
-                          width: 80,
+                          width: 72,
                         ),
-                        Text("시작시간",
+                        Text("Start time",
                         style: TextStyle(
                           fontSize: 20,
                         ),),
                         SizedBox(
                           width: 95,
                         ),
-                        Text("종료시간",style: TextStyle(
+                        Text("End time",style: TextStyle(
                           fontSize: 20,
                         ),),
                       ],
